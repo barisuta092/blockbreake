@@ -1,4 +1,4 @@
-import './style.css'
+
 import { Game } from './Game.js'
 
 // エラーハンドリング（デバッグ用）

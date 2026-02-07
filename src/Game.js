@@ -149,8 +149,8 @@ export class Game {
         const container = this.canvas.parentElement;
         if (!container) return;
 
-        this.canvas.width = container.clientWidth;
-        this.canvas.height = container.clientHeight;
+        this.canvas.width = container.clientWidth || window.innerWidth;
+        this.canvas.height = container.clientHeight || window.innerHeight;
 
         this.width = this.canvas.width;
         this.height = this.canvas.height;
