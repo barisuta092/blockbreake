@@ -37,6 +37,14 @@ export class Game {
         this.resetBalls();
         this.createBlocks();
 
+        // Use ResizeObserver for more reliable resize detection
+        const container = this.canvas.parentElement;
+        if (container) {
+            const observer = new ResizeObserver(() => {
+                this.resize();
+            });
+            observer.observe(container);
+        }
         window.addEventListener('resize', () => this.resize());
 
         // クリックで開始、またはボール発射
@@ -149,8 +157,14 @@ export class Game {
         const container = this.canvas.parentElement;
         if (!container) return;
 
-        this.canvas.width = container.clientWidth || window.innerWidth;
-        this.canvas.height = container.clientHeight || window.innerHeight;
+        const clientWidth = container.clientWidth || window.innerWidth;
+        const clientHeight = container.clientHeight || window.innerHeight;
+
+        // Skip resizing to 0 to prevent disappearing canvas
+        if (clientWidth === 0 || clientHeight === 0) return;
+
+        this.canvas.width = clientWidth;
+        this.canvas.height = clientHeight;
 
         this.width = this.canvas.width;
         this.height = this.canvas.height;
