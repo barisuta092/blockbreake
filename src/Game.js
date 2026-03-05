@@ -157,11 +157,11 @@ export class Game {
         const container = this.canvas.parentElement;
         if (!container) return;
 
-        const clientWidth = container.clientWidth || window.innerWidth;
-        const clientHeight = container.clientHeight || window.innerHeight;
+        const clientWidth = container.clientWidth;
+        const clientHeight = container.clientHeight;
 
         // Skip resizing to 0 to prevent disappearing canvas
-        if (clientWidth === 0 || clientHeight === 0) return;
+        if (!clientWidth || !clientHeight) return;
 
         this.canvas.width = clientWidth;
         this.canvas.height = clientHeight;
